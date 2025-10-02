@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NameTag } from './name-tag';
 
 const meta = {
-  title: 'Examples/Name Tag',
+  title: '🎸 Examples/Name Tag',
   component: NameTag,
   parameters: {
     layout: 'centered',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ChatInput } from './chat-input';
 
 const meta = {
-  title: 'Components/ChatInput',
+  title: '🩻 Components/ChatInput',
   component: ChatInput,
   parameters: {
     layout: 'padded',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Counter } from './counter';
 
 const meta = {
-  title: 'Examples/Accident Counter/Counter',
+  title: '🎸 Examples/Accident Counter/Counter',
   component: Counter,
 } satisfies Meta<typeof Counter>;
 

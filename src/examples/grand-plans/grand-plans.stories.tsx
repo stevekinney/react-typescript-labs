@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GrandPlans } from './grand-plans';
 
 const meta = {
-  title: 'Examples/Grand Plans',
+  title: '🎸 Examples/Grand Plans',
   component: GrandPlans,
 } satisfies Meta<typeof GrandPlans>;
 

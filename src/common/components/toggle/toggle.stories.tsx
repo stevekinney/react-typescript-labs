@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Toggle } from './toggle';
 
 const meta = {
-  title: 'Components/Toggle',
+  title: '🩻 Components/Toggle',
   component: Toggle,
   argTypes: {
     checked: {

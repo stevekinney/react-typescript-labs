@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { NestedBoxes } from './application';
+import { NestedBoxes } from './nested-boxes';
 
 import '$/common/index.css';
 

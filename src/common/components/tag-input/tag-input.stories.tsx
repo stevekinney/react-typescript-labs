@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { TagInput } from './tag-input';
 
 const meta = {
-  title: 'Components/TagInput',
+  title: '🩻 Components/TagInput',
   component: TagInput,
   argTypes: {
     disabled: {

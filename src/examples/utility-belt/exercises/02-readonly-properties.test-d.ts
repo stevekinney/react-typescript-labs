@@ -24,6 +24,7 @@ expectAssignable<ConfigWithReadonlyUrl>({
 config1.apiUrl = 'https://new-api.example.com';
 
 // Test 3: Non-readonly properties can be reassigned
+// @ts-ignore Remove this one when you implement the solution
 config1.timeout = 10000; // This should work
 
 // Test 4: Make multiple properties readonly
@@ -37,5 +38,7 @@ config2.apiUrl = 'test';
 config2.debug = true;
 
 // These should work
+// @ts-ignore Remove this one when you implement the solution
 config2.timeout = 3000;
+// @ts-ignore Remove this one when you implement the solution
 config2.retries = 5;

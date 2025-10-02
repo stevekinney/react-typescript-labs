@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ChatMessage } from './chat-message';
 
 const meta = {
-  title: 'Components/ChatMessage',
+  title: '🩻 Components/ChatMessage',
   component: ChatMessage,
   parameters: {
     layout: 'padded',

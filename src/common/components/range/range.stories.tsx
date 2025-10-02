@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Range } from './range';
 
 const meta = {
-  title: 'Components/Range',
+  title: '🩻 Components/Range',
   component: Range,
   argTypes: {
     min: {

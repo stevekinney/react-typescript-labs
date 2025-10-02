@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
-  Inbox,
-  Search,
-  FileX,
-  ShoppingCart,
-  Users,
   AlertCircle,
   CheckCircle,
+  FileX,
+  Inbox,
   Plus,
+  Search,
+  ShoppingCart,
+  Users,
 } from 'lucide-react';
-import { EmptyState } from './empty-state';
 import { Button } from '../button';
+import { EmptyState } from './empty-state';
 
 const meta = {
-  title: 'Components/EmptyState',
+  title: '🩻 Components/EmptyState',
   component: EmptyState,
   argTypes: {},
 } satisfies Meta<typeof EmptyState>;

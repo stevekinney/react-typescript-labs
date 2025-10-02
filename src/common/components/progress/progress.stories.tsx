@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Progress } from './progress';
 
 const meta = {
-  title: 'Components/Progress',
+  title: '🩻 Components/Progress',
   component: Progress,
   parameters: {
     layout: 'padded',

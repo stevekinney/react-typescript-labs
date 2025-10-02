@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NestedBoxes } from './nested-boxes';
 
 const meta = {
-  title: 'Examples/Nested Boxes',
+  title: '🎸 Examples/Nested Boxes',
   component: NestedBoxes,
 } satisfies Meta<typeof NestedBoxes>;
 

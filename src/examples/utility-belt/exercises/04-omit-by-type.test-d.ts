@@ -1,3 +1,5 @@
+// @ts-ignore
+
 import { expectAssignable, expectType } from 'tsd';
 import type { OmitByType } from './04-omit-by-type';
 
@@ -14,8 +16,12 @@ type WithoutNumbers = OmitByType<ApiResponse, number>;
 expectAssignable<WithoutNumbers>({ name: 'test', errors: [], success: true });
 
 declare const withoutNumbers: WithoutNumbers;
+
+// @ts-ignore Remove this one when you implement the solution
 expectType<string>(withoutNumbers.name);
+// @ts-ignore Remove this one when you implement the solution
 expectType<string[]>(withoutNumbers.errors);
+// @ts-ignore Remove this one when you implement the solution
 expectType<boolean>(withoutNumbers.success);
 
 // Test 2: Omit string properties
@@ -28,7 +34,6 @@ expectAssignable<WithoutBooleans>({ id: 1, name: 'test', errors: [], timestamp: 
 
 // Test 4: Verify omitted properties don't exist
 type OnlyNonNumbers = OmitByType<ApiResponse, number>;
-
 const invalid: OnlyNonNumbers = { name: 'test', errors: [], success: true, id: 1 };
 
 // Test 5: Complex type - omit arrays
@@ -44,5 +49,8 @@ type WithoutArrays = OmitByType<Complex, unknown[]>;
 expectAssignable<WithoutArrays>({ name: 'test', metadata: {}, count: 5 });
 
 declare const withoutArrays: WithoutArrays;
+
+// @ts-ignore Remove this one when you implement the solution
 expectType<string>(withoutArrays.name);
+// @ts-ignore Remove this one when you implement the solution
 expectType<number>(withoutArrays.count);

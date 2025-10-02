@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Tag } from './tag';
 
 const meta = {
-  title: 'Components/TagInput/Tag',
+  title: '🩻 Components/TagInput/Tag',
   component: Tag,
   parameters: {
     layout: 'centered',

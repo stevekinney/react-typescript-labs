@@ -1,5 +1,5 @@
 /**
- * Exercise 5: Omit By Type (Bonus Challenge!)
+ * Exercise 4: Omit By Type (Bonus Challenge!)
  *
  * Create a utility type called `OmitByType` that takes a type T and a type U,
  * and returns a new type with all properties removed whose values are assignable to U.
@@ -25,4 +25,5 @@
  */
 
 // TODO: Implement OmitByType here
+// @ts-expect-error Not implemented…yet
 export type OmitByType<T, U> = unknown;

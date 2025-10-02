@@ -74,6 +74,13 @@ export default [
     },
   },
   {
+    files: ['src/examples/utility-belt/exercises/**/*'], // Exercise files
+    rules: {
+      '@typescript-eslint/ban-ts-comment': 'off', // Allow @ts-expect-error in exercises
+      '@typescript-eslint/no-unused-vars': 'off', // Allow unused vars in exercises
+    },
+  },
+  {
     files: ['**/*.js'], // Apply to plain JavaScript files
     ...typescript.configs.disableTypeChecked, // Disable TS rules for JS files
   },

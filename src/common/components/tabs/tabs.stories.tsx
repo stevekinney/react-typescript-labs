@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from './tabs';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../card/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../card/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './tabs';
 
 const meta = {
-  title: 'Components/Tabs',
+  title: '🩻 Components/Tabs',
   component: Tabs,
   parameters: {
     layout: 'centered',

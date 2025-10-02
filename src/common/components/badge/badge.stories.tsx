@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge } from './badge';
 
 const meta = {
-  title: 'Components/Badge',
+  title: '🩻 Components/Badge',
   component: Badge,
   argTypes: {
     variant: {

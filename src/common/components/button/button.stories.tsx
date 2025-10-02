@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Plus, Trash2, Download, ChevronRight, Settings, Heart } from 'lucide-react';
+import { ChevronRight, Download, Heart, Plus, Settings, Trash2 } from 'lucide-react';
 
 import { Button } from './button';
 
 const meta = {
-  title: 'Components/Button',
+  title: '🩻 Components/Button',
   component: Button,
   argTypes: {
     variant: {

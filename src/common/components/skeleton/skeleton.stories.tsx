@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Skeleton, SkeletonText, SkeletonTitle, SkeletonButton, SkeletonAvatar } from './skeleton';
+import { Skeleton, SkeletonAvatar, SkeletonButton, SkeletonText, SkeletonTitle } from './skeleton';
 
 const meta = {
-  title: 'Components/Skeleton',
+  title: '🩻 Components/Skeleton',
   component: Skeleton,
   argTypes: {
     variant: {
