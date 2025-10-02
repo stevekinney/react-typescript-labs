@@ -24,6 +24,4 @@
  * - This will keep properties that DON'T match the type U
  */
 
-// TODO: Implement OmitByType here
-// @ts-expect-error Not implemented…yet
 export type OmitByType<T, U> = unknown;
