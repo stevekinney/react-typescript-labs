@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+# Pre-commit hook
+# Runs prettier formatting
+
+# Source utilities
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/utilities.sh"
+
+# Skip in CI environment
+if is_ci; then
+  skip_hook "Running in CI environment"
+fi
+
+print_header "Running pre-commit checks"
+start_timer
+
+# Run prettier via lint-staged
+print_info "Running prettier..."
+if ! npm exec lint-staged; then
+  end_timer "Pre-commit checks"
+  exit_with_error "Prettier formatting failed" "Fix the issues above and try again"
+fi
+
+end_timer "Pre-commit checks"
+print_success "Prettier formatting passed"
+exit 0

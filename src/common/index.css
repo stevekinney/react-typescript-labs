@@ -1,0 +1,115 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-scheme: light dark;
+
+  /* Primary — Electric Indigo */
+  --color-primary-50: oklch(98% 0.02 300);
+  --color-primary-100: oklch(94% 0.05 300);
+  --color-primary-200: oklch(88% 0.1 300);
+  --color-primary-300: oklch(78% 0.16 300);
+  --color-primary-400: oklch(52.017% 0.22003 300.156);
+  --color-primary-500: oklch(44.001% 0.17899 299.9);
+  --color-primary-600: oklch(52% 0.22 300);
+  --color-primary-700: oklch(44% 0.18 300);
+  --color-primary-800: oklch(36% 0.14 300);
+  --color-primary-900: oklch(28% 0.1 300);
+  --color-primary-950: oklch(20% 0.08 300);
+
+  /* Secondary — Cyberpunk Pink */
+  --color-secondary-50: oklch(97.94% 0.01 329.12);
+  --color-secondary-100: oklch(95.61% 0.03 324.41);
+  --color-secondary-200: oklch(91.18% 0.07 325.34);
+  --color-secondary-300: oklch(84.57% 0.12 327.52);
+  --color-secondary-400: oklch(76.34% 0.19 328.88);
+  --color-secondary-500: oklch(68.29% 0.24 329.78);
+  --color-secondary-600: oklch(59.93% 0.24 331.03);
+  --color-secondary-700: oklch(51.49% 0.21 332);
+  --color-secondary-800: oklch(28.896% 0.12039 333.821);
+  --color-secondary-900: oklch(39.68% 0.14 332.74);
+  --color-secondary-950: oklch(28.87% 0.12 333.18);
+
+  /* Tertiary — Neon Teal */
+  --color-tertiary-50: oklch(98.54% 0.02 187.35);
+  --color-tertiary-100: oklch(96.03% 0.06 188.15);
+  --color-tertiary-200: oklch(93.01% 0.1 185.83);
+  --color-tertiary-300: oklch(88.9% 0.14 188.02);
+  --color-tertiary-400: oklch(83.08% 0.14 190.22);
+  --color-tertiary-500: oklch(75.21% 0.13 190.94);
+  --color-tertiary-600: oklch(69.67% 0.12 194.06);
+  --color-tertiary-700: oklch(54.36% 0.09 194.79);
+  --color-tertiary-800: oklch(45.45% 0.07 197.35);
+  --color-tertiary-900: oklch(40.3% 0.06 196.41);
+  --color-tertiary-950: oklch(28.13% 0.05 201.42);
+
+  /* Slate — Futuristic Neutral */
+  --color-slate-50: oklch(97% 0.01 250);
+  --color-slate-100: oklch(92% 0.01 250);
+  --color-slate-200: oklch(85% 0.01 250);
+  --color-slate-300: oklch(75% 0.02 250);
+  --color-slate-400: oklch(65% 0.02 250);
+  --color-slate-500: oklch(55% 0.02 250);
+  --color-slate-600: oklch(46% 0.02 250);
+  --color-slate-700: oklch(38% 0.02 250);
+  --color-slate-800: oklch(30% 0.02 250);
+  --color-slate-900: oklch(22% 0.01 250);
+  --color-slate-950: oklch(14% 0.01 250);
+
+  /* Info — Electric Blue */
+  --color-info-50: oklch(97.5% 0.02 250);
+  --color-info-100: oklch(94% 0.05 250);
+  --color-info-200: oklch(88% 0.1 250);
+  --color-info-300: oklch(79% 0.16 250);
+  --color-info-400: oklch(70% 0.2 250);
+  --color-info-500: oklch(62% 0.22 250);
+  --color-info-600: oklch(53% 0.2 250);
+  --color-info-700: oklch(45% 0.16 250);
+  --color-info-800: oklch(37% 0.12 250);
+  --color-info-900: oklch(29% 0.09 250);
+  --color-info-950: oklch(21% 0.07 250);
+
+  /* Success — Acid Green */
+  --color-success-50: oklch(98% 0.02 145);
+  --color-success-100: oklch(95% 0.05 145);
+  --color-success-200: oklch(90% 0.11 145);
+  --color-success-300: oklch(82% 0.16 145);
+  --color-success-400: oklch(76% 0.2 145);
+  --color-success-500: oklch(70% 0.22 145);
+  --color-success-600: oklch(60% 0.2 145);
+  --color-success-700: oklch(50% 0.16 145);
+  --color-success-800: oklch(42% 0.12 145);
+  --color-success-900: oklch(34% 0.09 145);
+  --color-success-950: oklch(24% 0.07 145);
+
+  /* Warning — Toxic Amber */
+  --color-warning-50: oklch(98% 0.03 85);
+  --color-warning-100: oklch(95% 0.06 85);
+  --color-warning-200: oklch(91% 0.1 85);
+  --color-warning-300: oklch(84% 0.15 85);
+  --color-warning-400: oklch(76% 0.18 85);
+  --color-warning-500: oklch(72% 0.2 85);
+  --color-warning-600: oklch(62% 0.18 85);
+  --color-warning-700: oklch(52% 0.14 85);
+  --color-warning-800: oklch(44% 0.1 85);
+  --color-warning-900: oklch(36% 0.08 85);
+  --color-warning-950: oklch(26% 0.06 85);
+
+  /* Error — Laser Red */
+  --color-error-50: oklch(97.5% 0.02 30);
+  --color-error-100: oklch(94% 0.05 30);
+  --color-error-200: oklch(88% 0.1 30);
+  --color-error-300: oklch(80% 0.15 30);
+  --color-error-400: oklch(68% 0.2 30);
+  --color-error-500: oklch(58% 0.24 30);
+  --color-error-600: oklch(50% 0.22 30);
+  --color-error-700: oklch(42% 0.18 30);
+  --color-error-800: oklch(34% 0.14 30);
+  --color-error-900: oklch(26% 0.1 30);
+  --color-error-950: oklch(18% 0.08 30);
+}
+
+@layer base {
+  body {
+    @apply bg-white p-4 text-slate-950 transition-colors dark:bg-slate-950 dark:text-slate-50;
+  }
+}

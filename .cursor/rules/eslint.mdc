@@ -1,0 +1,331 @@
+---
+description:
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+
+# ESLint Rules
+
+## Code Quality & Style
+
+### General Principles
+
+- Write clean, readable, and maintainable code
+- Prefer explicit and clear code over clever shortcuts
+- Use modern ES6+ features and TypeScript when applicable
+- Follow consistent naming conventions (camelCase for variables/functions, PascalCase for classes/components)
+
+### Imports & Exports
+
+- **Import Organization**: Order imports logically:
+  1. React and React-related imports
+  2. External libraries
+  3. Internal modules using path aliases (@/)
+  4. Relative imports
+  5. Type imports last
+- **No Duplicate Imports**: Consolidate imports from the same module
+- **No Unused Imports**: Remove any unused imports immediately
+- **TypeScript Imports**: Use `import type` for type-only imports
+- **Node Protocol**: Always use `node:` protocol for Node.js built-in modules (e.g., `import fs from 'node:fs'`)
+- **No Circular Dependencies**: Avoid circular imports between modules
+- **No Self Imports**: Never import from the same file
+- **Path Aliases**: Prefer `@/` imports over relative paths for src/ files
+
+### TypeScript Guidelines
+
+- **Strict Type Safety**: Use proper TypeScript types, avoid `any` except in test files
+- **Consistent Type Imports**: Always use `import type` for type-only imports
+- **Optional Chaining**: Prefer optional chaining (`?.`) over manual null checks
+- **Nullish Coalescing**: Use `??` instead of `||` when checking for null/undefined
+- **Await Thenable**: Only await promises and thenable objects
+- **No Floating Promises**: Handle promise rejections appropriately (though currently relaxed)
+- **React Component Types**: Use `FC` or explicit return types for components
+- **Event Handler Types**: Use proper React event types (e.g., `React.MouseEvent<HTMLButtonElement>`)
+
+## Code Patterns & Best Practices
+
+### Control Flow
+
+- **No With Statements**: Never use `with` statements
+- **No Labels**: Avoid labeled statements
+- **Prefer Switch**: Use `switch` statements over complex if-else chains when appropriate
+- **Logical Operators**: Prefer logical operators over ternary when simpler
+
+### Functions & Async
+
+- **Promise Handling**:
+  - Don't wrap values in `Promise.resolve()` unnecessarily
+  - Use proper parameter names in promise methods
+  - Always catch or return promises
+  - Avoid nesting promises
+  - Don't mix callbacks and promises
+  - Don't use `new` with static promise methods
+  - Avoid returns in `finally` blocks
+- **Async/Await**: Don't await non-thenable expressions
+- **Prefer for...of**: Use `for...of` loops instead of `Array.forEach()` when possible
+
+### Variables & Scope
+
+- **Unused Variables**: Remove unused variables, prefix with `_` if needed for API compliance
+- **No Redeclaration**: Avoid variable redeclaration (handled by TypeScript)
+
+## Security Considerations
+
+- **Regex Safety**: Avoid non-literal regex patterns when possible
+- **Object Injection**: Be cautious with dynamic object access (though detection is relaxed)
+- **File System**: Use caution with dynamic file paths
+
+## File-Specific Rules
+
+### Test Files (`*.test.*`, `*.spec.*`, `/tests/`)
+
+- Allow `console.log` statements for debugging
+- Allow `any` type when necessary for mocking
+- Focus on readability and comprehensive test coverage
+- Use Vitest for testing React components
+- Use React Testing Library for component testing
+- Test user interactions over implementation details
+
+### Service Worker Files (`src/background/**`)
+
+- **No Browser APIs**: Never use `window`, `document`, `localStorage`, or `sessionStorage`
+- **Use Chrome APIs**: Use `chrome.storage` instead of web storage APIs
+- **Service Worker Globals**: Only use APIs available in service worker context
+- Available globals: `chrome`, `LanguageModel`, and standard service worker APIs
+
+### TypeScript Declaration Files (`*.d.ts`)
+
+- These are typically ignored and auto-generated
+- When writing custom declarations, use proper TypeScript declaration syntax
+
+## Comments & Documentation
+
+- **ESLint Comments**:
+  - Pair disable/enable comments properly
+  - Don't use unlimited disables
+  - Remove unused disable comments
+  - Use specific rule names in disable comments
+
+### Regex Patterns
+
+- Avoid empty capturing groups
+- Don't use lazy quantifiers at string ends
+- Prefer named capture groups when appropriate
+
+## Global Variables & Environment
+
+- **Available Globals**:
+  - Browser: Standard browser APIs
+  - Node.js: All Node.js globals
+  - Chrome Extensions: `chrome` API
+  - Bun: `Bun` runtime APIs
+  - Custom: `HTMLRewriter`, `LanguageModel`
+
+## File Organization
+
+- **Ignore Patterns**: Don't generate code for:
+  - `dist/`, `build/`, `coverage/`, `.bun/` directories
+  - `node_modules/`
+  - Lock files
+  - Git directories
+  - Temporary directories
+  - Auto-generated declaration files
+
+## Error Handling
+
+- **Disable Directives**: Report unused ESLint disable directives as errors
+- **Promise Validation**: Validate promise method parameters
+- **Import Cycles**: Prevent and resolve circular dependencies
+
+## Performance & Optimization
+
+- Prefer modern JavaScript features over polyfills
+- Use efficient array methods and iteration patterns
+- Avoid unnecessary async/await when not needed
+- Minimize bundle size by avoiding unnecessary dependencies
+
+## React-Specific Guidelines
+
+### React Hooks Rules
+
+- **Rules of Hooks**: Only call hooks at the top level, never in conditionals or loops
+- **Custom Hooks**: Prefix with `use` (e.g., `useAuth`, `useLocalStorage`)
+- **Dependency Arrays**: Include all dependencies in useEffect/useCallback/useMemo
+- **Cleanup Functions**: Always return cleanup functions in useEffect when needed
+
+### Component Guidelines
+
+- **Functional Components**: Always use functional components over class components
+- **Component Naming**: Use PascalCase for components, camelCase for instances
+- **Props Destructuring**: Destructure props in function parameters
+- **Default Props**: Use default parameters or defaultProps
+- **Key Props**: Always use stable, unique keys in lists
+- **Fragment Shorthand**: Use `<>` instead of `React.Fragment` when possible
+
+### JSX Guidelines
+
+- **Self-Closing Tags**: Use self-closing tags for components without children
+- **Boolean Props**: Omit `={true}` for boolean props
+- **Conditional Rendering**: Use `&&` for simple conditions, ternary for if-else
+- **Event Handlers**: Prefix with `handle` or `on` (e.g., `handleClick`, `onSubmit`)
+- **Inline Functions**: Avoid creating functions in render for performance
+
+### Performance Rules
+
+- **Memoization**: Use React.memo for expensive components
+- **useCallback**: Wrap callbacks passed to optimized child components
+- **useMemo**: Memoize expensive computations
+- **Lazy Loading**: Use React.lazy for code splitting
+- **Virtual Lists**: Consider virtualization for long lists
+
+### Accessibility (a11y)
+
+- **Semantic HTML**: Use proper HTML elements (button, nav, main, etc.)
+- **ARIA Labels**: Add aria-labels for interactive elements without visible text
+- **Keyboard Navigation**: Ensure all interactive elements are keyboard accessible
+- **Alt Text**: Always provide alt text for images
+- **Focus Management**: Handle focus appropriately in SPAs
+
+## Code Examples
+
+### Good Import Patterns
+
+```typescript
+// React imports first
+import React, { useState, useEffect, type FC } from 'react';
+import { useRouter } from 'next/router';
+
+// External libraries
+import { z } from 'zod';
+import axios from 'axios';
+import clsx from 'clsx';
+
+// Internal modules with path aliases
+import { Button } from '@/components/ui/Button';
+import { useAuth } from '@/hooks/useAuth';
+import { API_URL } from '@/constants';
+
+// Relative imports
+import { utils } from '../utils';
+
+// Type imports last
+import type { User } from '@/types';
+import type { ButtonProps } from './Button.types';
+```
+
+### Good TypeScript Patterns
+
+```typescript
+// Use optional chaining and nullish coalescing
+const name = user?.profile?.name ?? 'Unknown';
+
+// Proper type imports
+import type { ComponentProps } from 'react';
+
+// Handle promises properly
+try {
+  const result = await fetchData();
+  return result;
+} catch (error) {
+  console.error('Failed to fetch data:', error);
+  throw error;
+}
+```
+
+### Service Worker Code
+
+```typescript
+// Good - use chrome APIs
+chrome.storage.local.set({ key: 'value' });
+
+// Bad - browser APIs not available
+// window.localStorage.setItem('key', 'value'); // ❌
+// document.querySelector('.element'); // ❌
+```
+
+### Good React Component Pattern
+
+```typescript
+import { useState, useCallback, type FC } from 'react';
+import { z } from 'zod';
+import { Button } from '@/components/ui/Button';
+import type { User } from '@/types';
+
+interface UserCardProps {
+  user: User;
+  onUpdate?: (user: User) => void;
+  className?: string;
+}
+
+export const UserCard: FC<UserCardProps> = ({
+  user,
+  onUpdate,
+  className
+}) => {
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleEdit = useCallback(() => {
+    setIsEditing(true);
+  }, []);
+
+  const handleSave = useCallback((updatedUser: User) => {
+    onUpdate?.(updatedUser);
+    setIsEditing(false);
+  }, [onUpdate]);
+
+  return (
+    <div className={clsx('rounded-lg bg-white p-4', className)}>
+      <h3 className="text-lg font-bold">{user.name}</h3>
+      {isEditing ? (
+        <EditForm user={user} onSave={handleSave} />
+      ) : (
+        <Button onClick={handleEdit}>Edit</Button>
+      )}
+    </div>
+  );
+};
+```
+
+### Good Custom Hook Pattern
+
+```typescript
+import { useState, useEffect } from 'react';
+import { z } from 'zod';
+
+const DataSchema = z.object({
+  id: z.string(),
+  value: z.number(),
+});
+
+type Data = z.infer<typeof DataSchema>;
+
+export function useApiData(endpoint: string) {
+  const [data, setData] = useState<Data | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(endpoint);
+        const json = await response.json();
+        const validated = DataSchema.parse(json);
+        setData(validated);
+      } catch (err) {
+        setError(err instanceof Error ? err : new Error('Unknown error'));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [endpoint]);
+
+  return { data, loading, error };
+}
+```
+
+When generating code, always follow these patterns and ensure the code would pass the ESLint configuration provided.
+
+If you are unclear on any of these rules, review @eslint.config.js.

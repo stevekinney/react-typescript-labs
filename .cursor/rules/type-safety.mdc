@@ -1,0 +1,219 @@
+---
+description:
+globs: *.ts,*.tsx
+alwaysApply: false
+---
+
+# Type Validation with Zod
+
+You are an expert TypeScript developer who understands that type assertions (using `as`) only provide compile-time safety without runtime validation.
+
+## Zod Over Type Assertions
+
+- **NEVER** use type assertions (with `as`) for external data sources, API responses, or user inputs
+- **ALWAYS** use Zod schemas to validate and parse data from external sources
+- Implement proper error handling for validation failures
+
+## Zod Implementation Patterns
+
+- Import zod with: `import { z } from 'zod'` (not 'zod/v4' - we use standard Zod v3)
+- Define schemas near related types or in dedicated schema files
+- Use `schema.parse()` for throwing validation behavior
+- Use `schema.safeParse()` for non-throwing validation with detailed errors
+- Add meaningful error messages with `.refine()` and `.superRefine()`
+- Set up default values with `.default()` when appropriate
+- Use transformations with `.transform()` to convert data formats
+- Always handle potential validation errors
+
+```ts
+// ❌ WRONG: Using type assertions
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  age: number;
+}
+
+const fetchUser = async (id: string): Promise<User> => {
+  const response = await fetch(`/api/users/${id}`);
+  const data = await response.json();
+  return data as User; // DANGEROUS: No runtime validation!
+};
+```
+
+```ts
+// ✅ RIGHT: Using Zod for validation
+import { z } from 'zod';
+
+// Define the schema
+const UserSchema = z.object({
+  id: z.string().uuid(),
+  name: z.string().min(1),
+  email: z.string().email(),
+  age: z.number().int().positive().min(13),
+});
+
+// Derive the type from the schema
+type User = z.infer<typeof UserSchema>;
+
+const fetchUser = async (id: string): Promise<User> => {
+  const response = await fetch(`/api/users/${id}`);
+  const data = await response.json();
+
+  // Runtime validation
+  return UserSchema.parse(data);
+};
+
+// With error handling
+const fetchUserSafe = async (id: string): Promise<User | null> => {
+  try {
+    const response = await fetch(`/api/users/${id}`);
+    const data = await response.json();
+
+    const result = UserSchema.safeParse(data);
+    if (!result.success) {
+      console.error('Invalid user data:', result.error.format());
+      return null;
+    }
+
+    return result.data;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    return null;
+  }
+};
+```
+
+## React-Specific Validation Patterns
+
+### Form Validation with React Hook Form + Zod
+
+```typescript
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+// Define form schema
+const FormSchema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+  confirmPassword: z.string(),
+  age: z.number().min(18, 'Must be at least 18'),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ['confirmPassword'],
+});
+
+type FormData = z.infer<typeof FormSchema>;
+
+export function SignUpForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  const onSubmit = (data: FormData) => {
+    // Data is already validated by Zod
+    console.log('Valid form data:', data);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('email')} placeholder="Email" />
+      {errors.email && <span>{errors.email.message}</span>}
+
+      <input {...register('password')} type="password" />
+      {errors.password && <span>{errors.password.message}</span>}
+
+      <button type="submit">Sign Up</button>
+    </form>
+  );
+}
+```
+
+### Props Validation
+
+```typescript
+import { z } from 'zod';
+import type { FC } from 'react';
+
+// Define props schema
+const ComponentPropsSchema = z.object({
+  title: z.string(),
+  count: z.number().int().nonnegative(),
+  isActive: z.boolean().optional(),
+  items: z.array(z.string()).min(1),
+  config: z.object({
+    theme: z.enum(['light', 'dark']),
+    size: z.enum(['sm', 'md', 'lg']),
+  }),
+});
+
+type ComponentProps = z.infer<typeof ComponentPropsSchema>;
+
+// Validate props at runtime (useful for components receiving external data)
+export const SafeComponent: FC<unknown> = (props) => {
+  // Validate props at runtime
+  const validatedProps = ComponentPropsSchema.parse(props);
+
+  return (
+    <div>
+      <h1>{validatedProps.title}</h1>
+      <p>Count: {validatedProps.count}</p>
+    </div>
+  );
+};
+```
+
+### Context Value Validation
+
+```typescript
+import { createContext, useContext, type FC, type ReactNode } from 'react';
+import { z } from 'zod';
+
+const AuthContextSchema = z.object({
+  user: z.object({
+    id: z.string(),
+    email: z.string().email(),
+    role: z.enum(['admin', 'user', 'guest']),
+  }).nullable(),
+  login: z.function().args(z.string(), z.string()).returns(z.promise(z.void())),
+  logout: z.function().returns(z.void()),
+});
+
+type AuthContextValue = z.infer<typeof AuthContextSchema>;
+
+const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within AuthProvider');
+  }
+  // Validate context value at runtime if receiving from external source
+  return AuthContextSchema.parse(context);
+};
+```
+
+### Environment Variables Validation
+
+```typescript
+import { z } from 'zod';
+
+const EnvSchema = z.object({
+  VITE_API_URL: z.string().url(),
+  VITE_APP_NAME: z.string().min(1),
+  VITE_ENABLE_ANALYTICS: z.string().transform(v => v === 'true'),
+  VITE_MAX_UPLOAD_SIZE: z.string().transform(Number).pipe(z.number().positive()),
+});
+
+// Validate env vars at app startup
+export const env = EnvSchema.parse(import.meta.env);
+
+// Now use with full type safety
+const apiUrl = env.VITE_API_URL; // string (validated URL)
+const enableAnalytics = env.VITE_ENABLE_ANALYTICS; // boolean
+```

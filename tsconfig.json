@@ -1,0 +1,143 @@
+{
+  "compilerOptions": {
+    /* ========================= TARGET & LIBRARY SETTINGS ========================= */
+
+    // Specifies ECMAScript target version - ES2022 includes top-level await, .at() method, class fields
+    // Modern browsers support ES2022, Vite handles any additional transpilation for older browsers
+    "target": "ES2022",
+
+    // Built-in type definitions: DOM (browser APIs), DOM.Iterable (for...of on NodeLists), ES2022 (JS features)
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+
+    // Module code generation - ESNext for native ES modules with dynamic imports and top-level await
+    "module": "ESNext",
+
+    // How TypeScript resolves imports - 'bundler' is new in TS 5.0+ for tools like Vite
+    // Allows imports without extensions and supports package.json 'exports' field
+    "moduleResolution": "bundler",
+
+    /* ========================= JAVASCRIPT SUPPORT ========================= */
+
+    // Allow JavaScript files in the project - useful for gradual migration and config files
+    "allowJs": true,
+
+    // Don't type-check JavaScript files - prevents errors in looser JS code
+    "checkJs": false,
+
+    /* ========================= EMIT CONFIGURATION ========================= */
+
+    // Don't emit output files - Vite/esbuild handles compilation, TS only type-checks
+    "noEmit": true,
+
+    // Generate source maps for debugging - see original TS code in browser DevTools
+    "sourceMap": true,
+
+    // JSX transformation - 'react-jsx' is the new transform (React 17+), no React import needed
+    "jsx": "react-jsx",
+
+    /* ========================= STRICT TYPE CHECKING ========================= */
+
+    // Enable all strict type-checking options - essential for any serious TypeScript project
+    // Includes: strictNullChecks, strictFunctionTypes, strictBindCallApply, strictPropertyInitialization,
+    // noImplicitAny, noImplicitThis, alwaysStrict, useUnknownInCatchVariables
+    "strict": true,
+
+    // Require 'override' keyword when overriding base class methods - prevents silent bugs
+    "noImplicitOverride": true,
+
+    // Allow dot notation for index signatures - better developer experience
+    // false = config.name allowed, true = config["name"] required
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Don't distinguish between undefined and missing optional properties - matches React patterns
+    // false = { name: undefined } allowed, true = error
+    "exactOptionalPropertyTypes": false,
+
+    // Error on switch case fallthrough - catches missing break statements
+    "noFallthroughCasesInSwitch": true,
+
+    /* ========================= CODE QUALITY CHECKS ========================= */
+
+    // Don't error on unused local variables - ESLint handles this better with more flexibility
+    "noUnusedLocals": false,
+
+    // Don't error on unused parameters - prefix with _ to indicate intentionally unused
+    "noUnusedParameters": false,
+
+    // All code paths must return a value explicitly - catches missing returns
+    "noImplicitReturns": true,
+
+    // Error on unreachable code after return/throw/break
+    "allowUnreachableCode": false,
+
+    // Disallow unused labels in code
+    "allowUnusedLabels": false,
+
+    /* ========================= MODULE RESOLUTION OPTIONS ========================= */
+
+    // Enable interoperability between CommonJS and ES Modules - allows default imports
+    "esModuleInterop": true,
+
+    // Allow default imports from modules without default export - implied by esModuleInterop
+    "allowSyntheticDefaultImports": true,
+
+    // Allow importing .json files as modules
+    "resolveJsonModule": true,
+
+    // Ensure each file can be transpiled independently - required for Vite/esbuild
+    "isolatedModules": true,
+
+    // Treat all files as modules (not scripts) - enables top-level await, prevents globals
+    "moduleDetection": "force",
+
+    // Require explicit 'type' modifier for type-only imports - better tree-shaking
+    "verbatimModuleSyntax": true,
+
+    /* ========================= PATH MAPPING ========================= */
+
+    // Base directory for non-relative module imports
+    "baseUrl": ".",
+
+    // Path aliases for cleaner imports - @/components instead of ../../../components
+    "paths": {
+      "$/*": ["src/*"],
+      "$components/*": ["src/common/components/*"],
+      "$utilities/*": ["src/common/utilities/*"],
+      "$api/*": ["src/common/api/*"]
+    },
+
+    /* ========================= PERFORMANCE OPTIMIZATIONS ========================= */
+
+    // Skip type checking of .d.ts files - faster builds, can't fix node_modules anyway
+    "skipLibCheck": true,
+
+    // Save compilation info for faster subsequent builds
+    "incremental": true,
+
+    // Where to store incremental compilation cache - keep project root clean
+    "tsBuildInfoFile": "./node_modules/.cache/typescript/tsconfig.tsbuildinfo",
+
+    /* ========================= CONSISTENCY & ENVIRONMENT ========================= */
+
+    // Ensure consistent casing in file names - prevents issues on case-sensitive filesystems
+    "forceConsistentCasingInFileNames": true,
+
+    // Type packages to include globally - Vite environment variables and Bun runtime
+    "types": ["vite/client"]
+  },
+
+  /* ========================= FILES TO INCLUDE ========================= */
+  // All TypeScript/JavaScript files in src, plus config files and Storybook
+  "include": ["src/**/*", "vite.config.ts", ".storybook/**/*"],
+
+  /* ========================= FILES TO EXCLUDE ========================= */
+  // Dependencies and build outputs - no need to type-check these
+  // TypeScript labs are intentionally broken for students to fix
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "coverage",
+    "src/examples/utility-belt/exercises/**/*"
+  ]
+}
