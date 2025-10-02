@@ -7,19 +7,23 @@ type CounterControlsProps = {
 };
 
 interface CounterFormProps extends ComponentPropsWithoutRef<'form'> {
+  /** The direction of the form. */
   layout?: 'vertical' | 'horizontal';
 }
 
 const CounterControls = ({ setCount }: CounterControlsProps) => {
   return (
     <div className="flex gap-2">
-      <button onClick={() => setCount((previous) => previous - 1)}>➖ Decrement</button>
-      <button onClick={() => setCount(0)}>🔁 Reset</button>
-      <button onClick={() => setCount((previous) => previous + 1)}>➕ Increment</button>
+      <Button onClick={() => setCount((previous) => previous - 1)}>➖ Decrement</Button>
+      <Button onClick={() => setCount(0)}>🔁 Reset</Button>
+      <Button onClick={() => setCount((previous) => previous + 1)}>➕ Increment</Button>
     </div>
   );
 };
 
+/**
+ * A special kind of form for counter operations.
+ */
 const CounterForm = ({ onSubmit }: CounterFormProps) => {
   const [draftCount, setDraftCount] = useState(0);
 
@@ -32,6 +36,7 @@ const CounterForm = ({ onSubmit }: CounterFormProps) => {
         onChange={(e) => setDraftCount(e.target.valueAsNumber)}
         value={draftCount}
       />
+      <Button type="submit">Set Count</Button>
     </form>
   );
 };
@@ -45,6 +50,7 @@ export const Counter = () => {
       <p className="text-6xl">{count}</p>
       <CounterControls setCount={setCount} />
       <CounterForm
+        layout="vertical"
         onSubmit={(e) => {
           e.preventDefault();
 
