@@ -1,8 +1,16 @@
 # React TypeScript Labs
 
+## Running Storybook
+
+All of the examples are exposed as stories. To run Storybook, executre the following from your command line.
+
+```bash
+npm run storybook
+```
+
 ## Running Examples
 
-This project includes multiple examples and labs that cover using TypeScript with React.
+If Storybook is not working for you for some reason, this project includes multiple examples and labs that cover using TypeScript with React.
 
 ```bash
 npm run examples
@@ -21,7 +29,3 @@ Once you've selected an example, start the server:
 ```bash
 npm run dev
 ```
-
-## Available Examples
-
-We won't use _all_ of the examples today, but we have a number to choose from depending on where our conversation leads us.
