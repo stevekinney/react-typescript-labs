@@ -1,15 +1,17 @@
 import { Card } from '$/common/components/card';
+import { useState } from 'storybook/internal/preview-api';
 import { Button } from './button';
 
 export const Counter = () => {
+  const [count, setCount] = useState<number>(0);
   return (
     <Card className="border-primary-500 flex w-2/3 flex-col items-center gap-8">
       <h1>Days Since the Last Accident</h1>
-      <p className="text-6xl">0</p>
+      <p className="text-6xl">{count}</p>
       <div className="flex gap-2">
-        <Button>➖ Decrement</Button>
-        <Button>🔁 Reset</Button>
-        <Button>➕ Increment</Button>
+        <button onClick={() => setCount(count - 1)}>➖ Decrement</button>
+        <button onClick={() => setCount(0)}>🔁 Reset</button>
+        <button onClick={() => setCount(count + 1)}>➕ Increment</button>
       </div>
       <form className="flex items-center gap-2" onSubmit={(e) => e.preventDefault()}>
         <input
